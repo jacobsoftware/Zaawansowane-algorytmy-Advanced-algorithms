@@ -74,6 +74,7 @@ class List:
         return print('/*zwalnia pamięć*/')
     
     def test(self):
+        print('\nTestowanie, funkcja poza tematem zadania:')
         print('Test Head:',self.head.value)
         print('Test Tail:',self.tail.value)
 
@@ -98,10 +99,10 @@ def zadanie1():
     L.test()
 
 if __name__ == '__main__':
-    print('Zadanie 1: ')
+    print('Zadanie 1: \n')
     zadanie1()
-    # print('Zadanie 2: ')
+    # print('\nZadanie 2: \n')
 
-    # print('Zadanie 3: ')
+    # print('\nZadanie 3: \n')
     
 
