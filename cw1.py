@@ -1,8 +1,9 @@
 class Node:
-    def __init__(self, value=None):
+    def __init__(self, value=None):       
         self.value = value
         self.nextNode = None
         self.prevNode = None
+        
       
 
 # self.head - wskaźnik na pierwszy element listy o ile lista nie jest pusta, aby uzyskać wartość dla tego wskażnika 
@@ -17,20 +18,16 @@ class List:
     
     def list_insert(self,key):
         #node = type('Node',(),{'value':key,'nextNode':None,'prevNode':None})
-        node = Node(key)
+        new_node = Node(key)
 
         if self.head is None:          
-            self.head = node
-            self.tail = node
+            self.head = new_node
+            self.tail = new_node
 
         else:
-            node.nextNode = self.head
-            self.head = node
-            while node:
-                self.tail = node
-                node = node.nextNode
-                
-
+            new_node.nextNode = self.head
+            self.head.prevNode = new_node
+            self.head = new_node
 
     def write(self):
         node = self.head
@@ -52,29 +49,62 @@ class List:
             print('// -1')
 
     def list_insert_after(self,key,after):
-        pass
+        node = self.head
+        while node:
+            if node.value == after:
+                new_node = Node(key)
+                new_node.nextNode = node.nextNode
+                if node.nextNode:
+                    node.nextNode.prevNode = new_node
+                else:
+                    self.tail = new_node
+                node.nextNode = new_node
+                new_node.prevNode = node
+
+            node = node.nextNode
 
     def list_delete(self,key):
         node = self.head
-        prev_node = None
         while node:
             if node.value == key:
-                if prev_node:
-                    prev_node.nextNode = node.nextNode
+                if node.prevNode:
+                    node.prevNode.nextNode = node.nextNode
+
+                # lista 1 lub 0 elementowa
                 else:
-                    self.head = node.nextNode
-                return
-            prev_node = node
+                    self.head = node.nextNode 
+
+                if node.nextNode:
+                    node.nextNode.prevNode = node.prevNode
+
+                # lista 0 elementowa
+                else:
+                    self.tail = node.prevNode
+
             node = node.nextNode
 
     def list_insert_before(self,key,before):
-        pass
+        node = self.head
+        while node:
+            if node.value == before:
+                new_node = Node(key)
+                new_node.prevNode = node.prevNode
+                if node.prevNode:
+                    node.prevNode.nextNode = new_node
+                else:
+                    self.head = new_node
+                node.prevNode = new_node
+                new_node.nextNode = node
+            node = node.nextNode
+
     
     def clear(self):
+        self.head = None
+        self.tail = None
         return print('/*zwalnia pamięć*/')
     
     def test(self):
-        print('\nTestowanie, funkcja poza tematem zadania:')
+        print('\nTestowanie, funkcja spoza tematu zadania:')
         print('Test Head:',self.head.value)
         print('Test Tail:',self.tail.value)
 
@@ -96,7 +126,7 @@ def zadanie1():
     L.write()
     L.clear()
     L.write()
-    L.test()
+    #L.test()
 
 if __name__ == '__main__':
     print('Zadanie 1: \n')
@@ -104,5 +134,7 @@ if __name__ == '__main__':
     # print('\nZadanie 2: \n')
 
     # print('\nZadanie 3: \n')
+
+
     
 
