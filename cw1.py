@@ -146,8 +146,8 @@ class Stack():
         if self.top is 0: print('true')
         else: print('false')
     
-    def push(self,value):
-        self.data.list_insert(value)
+    def push(self,key):
+        self.data.list_insert(key)
         self.top = self.top + 1
 
     def pop(self):
@@ -183,8 +183,18 @@ class Queue():
         self.head = 1
         self.tail = 1
 
+    def queue_empty(self):
+        pass
+
+    def enqueue(self,key):
+        pass
+
+    def dequeue(self):
+        pass
+
 def zadanie3():
     Q = Queue()
+
 
 if __name__ == '__main__':
     print('Zadanie 1: \n')
