@@ -143,8 +143,8 @@ class Stack():
         self.top = 0 
 
     def stack_empty(self):
-        if self.top is 0: print('true')
-        else: print('false')
+        if self.top is 0: return True
+        else: return False
     
     def push(self,key):
         self.data.list_insert(key)
@@ -154,11 +154,11 @@ class Stack():
         if self.top is not 0:
             top_value = self.data.head.value
             string = '//'+str(top_value)
-            print(string)
             self.data.list_delete(top_value)
             self.top = self.top - 1
+            return string
         else:
-            print('//niedomiar')
+            return '//niedomiar'
 
 def zadanie2():  
     S = Stack()
@@ -167,14 +167,14 @@ def zadanie2():
     S.data.write()
     S.push(3)
     S.data.write()
-    S.stack_empty()
-    S.pop()
-    S.pop()
+    print(f'//{S.stack_empty()}')
+    print(S.pop())
+    print(S.pop())
     S.data.write()
-    S.pop()
-    S.pop()
+    print(S.pop())
+    print(S.pop())
     S.data.write()
-    S.stack_empty()
+    print(f'//{S.stack_empty()}')
 
 class Queue():
     def __init__(self):
@@ -184,17 +184,43 @@ class Queue():
         self.tail = 1
 
     def queue_empty(self):
-        pass
+        if self.head == self.tail: return True
+        else: return False
 
     def enqueue(self,key):
-        pass
+        if self.tail  == self.length: 
+            return '//przesycenie' 
+        elif self.head == 1 and self.tail == 1:
+            self.data.list_insert(key)
+            self.tail = self.tail + 1
+        else:
+            self.data.list_insert_after(key,self.data.tail.value)
+            self.tail = self.tail + 1
 
     def dequeue(self):
-        pass
+        if self.queue_empty():
+            return 'niedomiar'
+        else:
+            removed_value = self.data.head.value
+            self.data.list_delete(self.data.head.value)
+            self.head = self.head + 1
+            return removed_value
 
 def zadanie3():
     Q = Queue()
-
+    Q.enqueue(1)
+    Q.enqueue(2)
+    Q.data.write()
+    Q.enqueue(3)
+    Q.data.write()
+    print(f'//{Q.queue_empty()}')
+    print(f'//{Q.dequeue()}')
+    print(f'//{Q.dequeue()}')
+    Q.data.write()
+    print(f'//{Q.dequeue()}')
+    print(f'//{Q.dequeue()}')
+    Q.data.write()
+    print(f'//{Q.queue_empty()}')
 
 if __name__ == '__main__':
     print('Zadanie 1: \n')
